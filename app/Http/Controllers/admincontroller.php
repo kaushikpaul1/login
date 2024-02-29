@@ -57,9 +57,17 @@ class admincontroller extends Controller
 
     public function postlogin(Request $request)
     {
+        $request->validate([
+            // 'name'=>'required',
+            // 'email'=>'required|email',
+            // 'password'=>'required',
+            'captcha' => 'required|captcha',
+
+        ]);
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
+            
             
         ]);
         if (Auth::attempt($credentials)) {
