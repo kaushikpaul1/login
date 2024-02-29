@@ -28,27 +28,27 @@ class admincontroller extends Controller
             return back()->with('error', 'Email already in use');
         }
 
-$request->validate([
-    // 'name'=>'required',
-    // 'email'=>'required|email',
-    // 'password'=>'required',
-    'captcha'=>'required',
+        $request->validate([
+            // 'name'=>'required',
+            // 'email'=>'required|email',
+            // 'password'=>'required',
+            'captcha' => 'required|captcha',
 
-]);
+        ]);
 
         //This function don't need any custom model it's use by default user model
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            
+
         ]);
-        $credentials = [
-            'name' => $user->name,
-            'password' => $request->password,
-        ];
-        Auth::attempt($credentials);
-        return redirect()->route('register.store')->with('success', 'Congratulations your account has been created');
+        // $credentials = [
+        //     'name' => $user->name,
+        //     'password' => $request->password,
+        // ];
+        // Auth::attempt($credentials);
+        return redirect()->route('login.store')->with('successregister', 'Congratulations your account has been created');
     }
 
 
@@ -60,10 +60,11 @@ $request->validate([
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
+            
         ]);
         if (Auth::attempt($credentials)) {
             // $request->session()->regenerate();
-            return redirect('/dashboard')->with('success', 'Successfully logged in');
+            return redirect('/dashboard')->with('successlogin', 'Successfully logged in');
             // return redirect()->route('dashboard.view')->with('success', 'Successfully logged in');
 
         }

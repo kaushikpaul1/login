@@ -10,7 +10,7 @@ class CaptchaController extends Controller
         return view('register');
     }
     public function reloadCaptcha(){
-        return response()->json(['captcha'=>captcha_img()]);
+        return response()->json(['captcha'=>captcha_img('math')]);
     }
     // public function post(Request $request){
     //     $request->validate([

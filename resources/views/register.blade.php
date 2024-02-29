@@ -70,9 +70,9 @@
                     </div>
 
                     <div class="input-group mb-3">
-                        
+
                         <div class="captcha">
-                            <span>{!! captcha_img() !!}</span>
+                            <span>{!! captcha_img('math') !!}</span>
                             <button type="button" class="btn btn-danger reload" id="reload">
                                 &#x21bb;
                             </button>
@@ -80,7 +80,9 @@
 
 
                         <input type="text" class="form-control mx-2 " placeholder="Enter Captcha" name="captcha">
-
+                        @error('captcha')
+                            <label for="" class="text-danger">{{ $message }}</label>
+                        @enderror
                     </div>
 
                     <div class="row">

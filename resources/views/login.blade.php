@@ -20,7 +20,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{../../index2.html}"><b>Admin</b>LTE</a>
+            <a href="{../../index2.html}"><b>Login</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -29,6 +29,11 @@
                 @if (session('error'))
                     <div class="alert alert-danger text-light text-center m-2" role="alert">
                         {{ session ('error')}}
+                    </div>
+                @endif
+                @if (session('successregister'))
+                    <div class="alert alert-success text-light text-center m-2" role="alert">
+                        {{ session ('successregister')}}
                     </div>
                 @endif
 
@@ -50,6 +55,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="input-group mb-3">
+
+                        <div class="captcha">
+                            <span>{!! captcha_img('math') !!}</span>
+                            <button type="button" class="btn btn-danger reload" id="reload">
+                                &#x21bb;
+                            </button>
+                        </div>
+
+
+                        <input type="text" class="form-control mx-2 " placeholder="Enter Captcha" name="captcha">
+                        @error('captcha')
+                            <label for="" class="text-danger">{{ $message }}</label>
+                        @enderror
+                    </div>
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
@@ -67,7 +87,7 @@
                     </div>
                 </form>
 
-                <div class="social-auth-links text-center mb-3">
+                {{-- <div class="social-auth-links text-center mb-3">
                     <p>- OR -</p>
                     <a href="#" class="btn btn-block btn-primary">
                         <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
@@ -75,7 +95,7 @@
                     <a href="#" class="btn btn-block btn-danger">
                         <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
                     </a>
-                </div>
+                </div> --}}
                 <!-- /.social-auth-links -->
 
                 <p class="mb-1">
@@ -96,6 +116,17 @@
     <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../assets/js/adminlte.min.js"></script>
+    <script>
+        $('#reload').click(function() {
+            $.ajax({
+                type: 'GET',
+                url: 'reload-captcha',
+                success: function(data) {
+                    $(".captcha span").html(data.captcha)
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
