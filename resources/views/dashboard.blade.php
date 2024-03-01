@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,13 +16,17 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="../assets/css/adminlte.min.css">
 </head>
+
 <body>
-    <h1>Dashboard</h1>
+    <h1 class="text-success">Dashboard</h1>
     @if (session('successlogin'))
-    <div class="alert alert-success text-light text-center m-2" role="alert">
-        {{ session ('successlogin')}}
+        <div class="alert alert-success text-light text-center m-2" role="alert">
+            {{ session('successlogin') }}
+        </div>
+    @endif
+    <div class="text-right mx-4">
+        <a href="{{ route('logout') }}"> <button type="button" class="btn btn-danger ">Logout</button></a>
     </div>
-@endif
     <!-- jQuery -->
     <script src="../assets/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -31,4 +34,5 @@
     <!-- AdminLTE App -->
     <script src="../assets/js/adminlte.min.js"></script>
 </body>
+
 </html>
